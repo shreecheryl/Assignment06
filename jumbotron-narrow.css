@@ -1,7 +1,16 @@
 /* Customize colors CD */
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: #dec09a;
     background-color: #a22025;   
+}
+
+a {
+    color: #a22025;
+}
+
+.red {
+    color: #a22025;
 }
 
 /* Space out content a bit */
