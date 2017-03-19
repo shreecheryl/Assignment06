@@ -25,6 +25,8 @@
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+      <script src="script.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -57,16 +59,20 @@
               </div>
               <div class="form-group">
               <label for="name">Address Type:</label>
-              <select name="addressType">
+              <select name="addressType" id="addressType">
                   <option value="select">Select</option>
                   <option value="house">House</option>
                   <option value="apartment">Apartment</option>
                   <option value="business">Business</option>
                   <option value="campus">Campus</option>
-                  <option value="house">Hotel</option>
-                  <option value="apartment">Dorm</option>
-                  <option value="business">Other</option>
+                  <option value="hotel">Hotel</option>
+                  <option value="dorm">Dorm</option>
+                  <option value="other" id="other">Other</option>
               </select>
+              </div>
+              <div class="form-group hidden" id="addressType2">
+                <label for="email">Please specify address type:</label>
+                <input type="text" class="form-control" id="otherAddressType">
               </div>
               <div class="form-group">
                 <label for="email">Email address:</label>

@@ -13,6 +13,10 @@ a {
     color: #a22025;
 }
 
+.hidden {
+    display: none;
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
