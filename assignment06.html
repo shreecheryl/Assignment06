@@ -52,10 +52,12 @@
 
       <div class="row marketing">
         <div class="col-lg-6">
+        <p><span class="required">* = Required Field</span></p>
             <form name="deliveryLocation">
              <div class="form-group">
                 <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name">
+                <input type="text" class="form-control" name="name">
+                <span class="required"> *</span>
               </div>
               <div class="form-group">
               <label for="name">Address Type:</label>
@@ -76,11 +78,11 @@
               </div>
               <div class="form-group">
                 <label for="email">Email address:</label>
-                <input type="email" class="form-control" id="email">
+                <input type="email" class="form-control" name="email">
               </div>
               <div class="form-group">
                 <label for="pwd">Password:</label>
-                <input type="password" class="form-control" id="pwd">
+                <input type="password" class="form-control" name="password">
               </div>
               <div class="checkbox">
                 <label><input type="checkbox"> Remember me</label>

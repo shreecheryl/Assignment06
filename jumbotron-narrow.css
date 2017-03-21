@@ -21,6 +21,16 @@ a {
     padding-left: 50px;
 }
 
+.form-control {
+    display: inline-block;
+    width: 95%;
+}
+
+.required {
+    color: #a22025;
+    font-size: 1em;
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
