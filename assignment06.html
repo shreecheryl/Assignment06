@@ -51,18 +51,18 @@
       </div>
 
       <div class="row marketing">
-        <div class="col-lg-6">
+        <div class="col-lg-10">
         <p><span class="required">* = Required Field</span></p>
             <form name="deliveryLocation">
              <div class="form-group">
-                <label for="name">Name:</label>
+                <label for="name">Name:</label><br>
                 <input type="text" class="form-control" name="name">
                 <span class="required"> *</span>
               </div>
               <div class="form-group">
-              <label for="name">Address Type:</label>
+              <label for="name">Address Type:</label><br>
               <select name="addressType" id="addressType">
-                  <option value="select">Select</option>
+                  <option value="select" selected="selected">Select</option>
                   <option value="house">House</option>
                   <option value="apartment">Apartment</option>
                   <option value="business">Business</option>
@@ -71,22 +71,120 @@
                   <option value="dorm">Dorm</option>
                   <option value="other" id="other">Other</option>
               </select>
+              <span class="required"> *</span>
               </div>
               <div class="form-group hidden" id="addressType2">
-                <label for="email">Please specify address type:</label>
+                <label for="email">Please specify address type:</label><br>
                 <input type="text" class="form-control" name="otherAddressType">
+                <span class="required"> *</span>
               </div>
               <div class="form-group">
-                <label for="email">Email address:</label>
+                <label for="name">Street Address:</label><br>
+                <input type="text" class="form-control" name="address">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="name">Apt, Suite or Room Number:</label><br>
+                <input type="text" class="form-control" name="aptNumber">
+              </div>
+              <div class="form-group">
+                <label for="name">City:</label><br>
+                <input type="text" class="form-control" name="city">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="name">State:</label><br>
+                <input type="text" class="form-control" name="state">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="name">Zip Code:</label><br>
+                <input type="text" class="form-control" name="zipCode">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="name">Phone:</label><br>
+                <input type="text" class="form-control" name="phone" placeholder="Ex: 999-999-9999">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="email">Email address:</label><br>
                 <input type="email" class="form-control" name="email">
+                <span class="required"> *</span>
+              </div>
+
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+      </div>
+      
+      <div class="row marketing">
+        <div class="col-lg-10">
+            <form name="buildOrder">
+             <div class="form-group">
+                <label>Dough Options:</label><br>
+                <input type="radio" name="doughOption" value="handTossed"><label for="handTossed"> Hand Tossed</label><br>
+                <label for="handTossed">Thin Crust</label>
+                <input type="radio" name="doughOption" value="thinCrust"><br>
+                <label for="handTossed">New York Style</label>
+                <input type="radio" name="doughOption" value="newYorkStyle"><br>
+                <label for="handTossed">Gluten Free</label>
+                <input type="radio" name="doughOption" value="glutenFree"><br>
               </div>
               <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input type="password" class="form-control" name="password">
+              <label for="name">Address Type:</label><br>
+              <select name="addressType" id="addressType">
+                  <option value="select" selected="selected">Select</option>
+                  <option value="house">House</option>
+                  <option value="apartment">Apartment</option>
+                  <option value="business">Business</option>
+                  <option value="campus">Campus</option>
+                  <option value="hotel">Hotel</option>
+                  <option value="dorm">Dorm</option>
+                  <option value="other" id="other">Other</option>
+              </select>
+              <span class="required"> *</span>
               </div>
-              <div class="checkbox">
-                <label><input type="checkbox"> Remember me</label>
+              <div class="form-group hidden" id="addressType2">
+                <label for="email">Please specify address type:</label><br>
+                <input type="text" class="form-control" name="otherAddressType">
+                <span class="required"> *</span>
               </div>
+              <div class="form-group">
+                <label for="name">Street Address:</label><br>
+                <input type="text" class="form-control" name="address">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="name">Apt, Suite or Room Number:</label><br>
+                <input type="text" class="form-control" name="aptNumber">
+              </div>
+              <div class="form-group">
+                <label for="name">City:</label><br>
+                <input type="text" class="form-control" name="city">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="name">State:</label><br>
+                <input type="text" class="form-control" name="state">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="name">Zip Code:</label><br>
+                <input type="text" class="form-control" name="zipCode">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="name">Phone:</label><br>
+                <input type="text" class="form-control" name="phone" placeholder="Ex: 999-999-9999">
+                <span class="required"> *</span>
+              </div>
+              <div class="form-group">
+                <label for="email">Email address:</label><br>
+                <input type="email" class="form-control" name="email">
+                <span class="required"> *</span>
+              </div>
+
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>
