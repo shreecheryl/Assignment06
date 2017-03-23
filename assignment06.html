@@ -116,60 +116,52 @@
               <h3 class="red">Build Your Order</h4>
               <hr>
               <div class="form-group" id="dough">
-                <label>STEP 1: Choose A Dough Option</label><br>
+                <label>STEP 1: Choose A Dough Option</label><span class="required"> *</span><br>
                 <input type="radio" name="doughOption" value="handTossed">
-                <label for="handTossed">&nbsp;&nbsp;Hand Tossed</label><br>
+                <label for="handTossed">Hand Tossed</label><br>
                 <input type="radio" name="doughOption" value="thinCrust">
-                <label for="handTossed">&nbsp;&nbsp;Thin Crust</label><br>
+                <label for="handTossed">Thin Crust</label><br>
                 <input type="radio" name="doughOption" value="newYorkStyle">
-                <label for="handTossed">&nbsp;&nbsp;New York Style</label><br>
+                <label for="handTossed">New York Style</label><br>
                 <input type="radio" name="doughOption" value="glutenFree">
-                <label for="handTossed">&nbsp;&nbsp;Gluten Free</label>
+                <label for="handTossed">Gluten Free</label>
               </div>
               <div class="form-group">
-              <label for="name">STEP 2: Choose Size</label><br>
+              <label for="name">STEP 2: Choose Size</label><span class="required"> *</span><br>
               <select name="size" id="size"><option value="Select" selected="selected">Select</option></select>
-              <span class="required"> *</span>
-              </div>
-              <div class="form-group hidden" id="addressType2">
-                <label for="email">Please specify address type:</label><br>
-                <input type="text" class="form-control" name="otherAddressType">
-                <span class="required"> *</span>
               </div>
               <div class="form-group">
-                <label for="name">Street Address:</label><br>
-                <input type="text" class="form-control" name="address">
-                <span class="required"> *</span>
+              <label for="name">STEP 3: Cheese Options</label><br>
+              <select name="cheese">
+                  <option name="light" value="0">Light: no charge</option>
+                  <option name="normal" value="0" selected="selected">Normal: no charge</option>
+                  <option name="extra" value="2.99">Extra: $2.99</option>
+                  <option name="double" value="3.99">Double: $3.99</option>
+              </select>
               </div>
               <div class="form-group">
-                <label for="name">Apt, Suite or Room Number:</label><br>
-                <input type="text" class="form-control" name="aptNumber">
+              <label for="name">STEP 4: Sauce Options</label><br>
+              <select name="sauce">
+                  <option name="regular" value="0" selected="selected">Regular Tomato: no charge</option>
+                  <option name="hearty" value=".99">Hearty Tomato: $0.99</option>
+                  <option name="bbq" value="1.99">BBQ Sauce: $1.99</option>
+              </select>
               </div>
-              <div class="form-group">
-                <label for="name">City:</label><br>
-                <input type="text" class="form-control" name="city">
-                <span class="required"> *</span>
+              <div class="form-group" id="toppings">
+                <label>STEP 5: Toppings</label><br>
+                <label for="pepperoni"><input type="checkbox" name="pepperoni" value=".99"> Pepperoni</label>
+                <label for="sausage"><input type="checkbox" name="sausage" value=".99"> Sausage</label>
+                <label for="ham"><input type="checkbox" name="ham" value=".99"> Ham</label>
+                <label for="bacon"><input type="checkbox" name="bacon" value=".99"> Bacon</label>
+                <label for="salami"><input type="checkbox" name="salami" value=".99"> Salami</label>
+                <label for="peppers"><input type="checkbox" name="peppers" value=".99"> Peppers</label>
+                <label for="olives"><input type="checkbox" name="olives" value=".99"> Olives</label>
+                <label for="jalapenos"><input type="checkbox" name="jalapenos" value=".99"> Jalapenos</label>
+                <label for="mushrooms"><input type="checkbox" name="mushrooms" value=".99"> Mushrooms</label>
+                <label for="pineapple"><input type="checkbox" name="pineapple" value=".99"> Pineapple</label>
+                <label for="onions"><input type="checkbox" name="onions" value=".99"> Onions</label>
               </div>
-              <div class="form-group">
-                <label for="name">State:</label><br>
-                <input type="text" class="form-control" name="state">
-                <span class="required"> *</span>
-              </div>
-              <div class="form-group">
-                <label for="name">Zip Code:</label><br>
-                <input type="text" class="form-control" name="zipCode">
-                <span class="required"> *</span>
-              </div>
-              <div class="form-group">
-                <label for="name">Phone:</label><br>
-                <input type="text" class="form-control" name="phone" placeholder="Ex: 999-999-9999">
-                <span class="required"> *</span>
-              </div>
-              <div class="form-group">
-                <label for="email">Email address:</label><br>
-                <input type="email" class="form-control" name="email">
-                <span class="required"> *</span>
-              </div>
+              
 
               <button type="submit" class="btn btn-default">Submit</button>
             </form>

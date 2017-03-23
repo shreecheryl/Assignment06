@@ -35,6 +35,14 @@ h3 {
     font-size: 1em;
 }
 
+input[type="radio"], input[type="checkbox"] {
+    margin-right: 2px;
+}
+
+#toppings label {
+    margin-right: 15px;
+}
+
 /* Space out content a bit */
 body {
   padding-top: 20px;
