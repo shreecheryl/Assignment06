@@ -1,6 +1,6 @@
 function init() {
     "use strict";
-    document.deliveryLocation.name.focus();
+    document.pizzaOrder.name.focus();
     
     function required(event) {
         if (event.target.value === "") {
@@ -32,32 +32,32 @@ function init() {
     }
     
     function checkAddressType() {
-        var chosenOption = document.deliveryLocation.addressType.selectedIndex;
-        var addressType = document.deliveryLocation.addressType.options[chosenOption].value;
+        var chosenOption = document.pizzaOrder.addressType.selectedIndex;
+        var addressType = document.pizzaOrder.addressType.options[chosenOption].value;
         if (addressType === "select") {
             event.target.nextElementSibling.firstChild.nodeValue = "Please select an option";
             event.target.focus();  
         } else if (addressType === "other") {
             event.target.nextElementSibling.firstChild.nodeValue = "";
-            document.deliveryLocation.otherAddressType.focus();
+            document.pizzaOrder.otherAddressType.focus();
         } else {
             event.target.nextElementSibling.firstChild.nodeValue = "";
-            document.deliveryLocation.address.focus();
+            document.pizzaOrder.address.focus();
         }
     }
     
     function checkEntry(event) {
         var patt;
         switch (event.target.name) {
-            case "zipCode":
-                patt = /^[0-9]{5}(?:-[0-9]{4})?$/;
-                break;
-            case "phone":
-                patt = /((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/;
-                break;
-            case "email":
-                patt = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-                break;
+        case "zipCode":
+            patt = /^[0-9]{5}(?:-[0-9]{4})?$/;
+            break;
+        case "phone":
+            patt = /((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/;
+            break;
+        case "email":
+            patt = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+            break;
         }
         if (!patt.test(event.target.value)) {
             event.target.nextElementSibling.firstChild.nodeValue = "Invalid entry";
@@ -65,65 +65,125 @@ function init() {
             event.target.focus();
         } else {
             event.target.nextElementSibling.firstChild.nodeValue = "";
-            console.log(event.target);
         }
     }
     
     // Check Name Entry
     
-    var customerName = document.deliveryLocation.name;
-    customerName.addEventListener("blur", required);
-    customerName.addEventListener("blur", onlyLetters);
+    //var customerName = document.pizzaOrder.name;
+//    customerName.addEventListener("blur", required);
+//    customerName.addEventListener("blur", onlyLetters);
+//    
+//    // Check Address Type
+//    //var addressType = document.pizzaOrder.addressType;
+//    addressType.addEventListener("blur", checkAddressType);
+//    addressType.addEventListener("change", checkAddressType);
+//    
+//    // Display input field if they select "other" for Address Type
+//    
+//    //var selection = document.pizzaOrder.addressType; // alternative syntax to document.getElementById("addressType") using form name attribute
+//    selection.addEventListener("change", function () {
+//        var other = document.getElementById("addressType2");
+//        if (document.getElementById("other").selected) {
+//            other.setAttribute("class", "form-group indent");
+//            document.pizzaOrder.otherAddressType.focus();
+//        } else {
+//            other.setAttribute("class", "form-group hidden");
+//        }    
+//    });
+//    
+//    // Check Specify Address Type Entry
+//    //var otherAddressType = document.pizzaOrder.otherAddressType;
+//    otherAddressType.addEventListener("blur", required);
+//    
+//    // Check Address Entry
+//    
+//    //var address = document.pizzaOrder.address;
+//    address.addEventListener("blur", required);
+//    
+//    // Check City Entry
+//    
+//    //var city = document.pizzaOrder.city;
+//    city.addEventListener("blur", required);
+//    
+//    // Check State Entry
+//    
+//    //var state = document.pizzaOrder.state;
+//    state.addEventListener("blur", stateCheck);
+//    
+//    // Check Zip Code Entry
+//    
+//    //var zip = document.pizzaOrder.zipCode;
+//    zip.addEventListener("blur", checkEntry);           
+//    
+//    // Check Phone Number Entry
+//    
+//    //var phone = document.pizzaOrder.phone;
+//    phone.addEventListener("blur", checkEntry);
+//                
+//    // Check Email Entry
+//    
+//    //var email = document.pizzaOrder.email;
+//    email.addEventListener("blur", checkEntry);
     
-    // Check Address Type
-    var addressType = document.deliveryLocation.addressType;
-    addressType.addEventListener("blur", checkAddressType);
-    addressType.addEventListener("change", checkAddressType);
+    // Size & Price Options
     
-    // Display input field if they select "other" for Address Type
+    var handTossed = {
+        Small: 9.99,
+        Medium: 12.99,
+        Large: 14.99  
+    };
     
-    var selection = document.deliveryLocation.addressType; // alternative syntax to document.getElementById("addressType") using form name attribute
-    selection.addEventListener("change", function () {
-        if (document.getElementById("other").selected) {
-            var other = document.getElementById("addressType2");
-            other.setAttribute("class", "form-group indent");
-            document.deliveryLocation.otherAddressType.focus();
-        }     
-    });
+    var thinCrust = {
+        Medium: 11.99,
+        Large: 13.99,   
+    };
     
-    // Check Specify Address Type Entry
-    var otherAddressType = document.deliveryLocation.otherAddressType;
-    otherAddressType.addEventListener("blur", required);
+    var newYorkStyle = {
+        Large: 16.99,
+        ExtraLarge: 19.99
+    };
     
-    // Check Address Entry
+    var glutenFree = {
+        Small: 10.99
+    };
     
-    var address = document.deliveryLocation.address;
-    address.addEventListener("blur", required);
+    function removeOptions() {
+        while (document.getElementById("size").childNodes.length > 1) {
+            document.getElementById("size").removeChild(document.getElementById("size").childNodes[1]);
+        }
+    }
     
-    // Check City Entry
+    function createSizeOptions(event) {
+        var sizes;
+        var size;
+        
+        switch (event.target.value) {
+        case "handTossed":
+            sizes = handTossed;
+            break;
+        case "thinCrust":
+            sizes = thinCrust;
+            break;
+        case "newYorkStyle":
+            sizes = newYorkStyle;
+            break;
+        case "glutenFree":
+            sizes = glutenFree;
+            break;
+        }
+        for (size in sizes) {
+            var node = document.createElement("option");
+            var textnode = document.createTextNode(size + " $" + sizes[size]);
+            node.appendChild(textnode);
+            document.pizzaOrder.size.appendChild(node); 
+        }
+    }
     
-    var city = document.deliveryLocation.city;
-    city.addEventListener("blur", required);
+    var dough = document.getElementById("dough");
+    dough.addEventListener("change", removeOptions);
+    dough.addEventListener("change", createSizeOptions);
     
-    // Check State Entry
-    
-    var state = document.deliveryLocation.state;
-    state.addEventListener("blur", stateCheck);
-    
-    // Check Zip Code Entry
-    
-    var zip = document.deliveryLocation.zipCode;
-    zip.addEventListener("blur", checkEntry);           
-    
-    // Check Phone Number Entry
-    
-    var phone = document.deliveryLocation.phone;
-    phone.addEventListener("blur", checkEntry);
-                
-    // Check Email Entry
-    
-    var email = document.deliveryLocation.email;
-    email.addEventListener("blur", checkEntry); 
                 
 } // end of init
 
