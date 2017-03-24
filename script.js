@@ -36,7 +36,7 @@ function init() {
         var addressType = document.pizzaOrder.addressType.options[chosenOption].value;
         if (addressType === "select") {
             event.target.nextElementSibling.firstChild.nodeValue = "Please select an option";
-            event.target.focus();  
+            event.target.focus();
         } else if (addressType === "other") {
             event.target.nextElementSibling.firstChild.nodeValue = "";
             document.pizzaOrder.otherAddressType.focus();
@@ -144,12 +144,12 @@ function init() {
     var handTossed = {
         Small: 9.99,
         Medium: 12.99,
-        Large: 14.99  
+        Large: 14.99
     };
     
     var thinCrust = {
         Medium: 11.99,
-        Large: 13.99,   
+        Large: 13.99
     };
     
     var newYorkStyle = {
@@ -194,7 +194,7 @@ function init() {
             node.setAttribute("value", sizes[size]);
             var textnode = document.createTextNode(size + " $" + sizes[size]);
             node.appendChild(textnode);
-            document.pizzaOrder.size.appendChild(node); 
+            document.pizzaOrder.size.appendChild(node);
         }
     }
     
@@ -221,15 +221,23 @@ function init() {
     
     // Keep Running Total
     
-    var total = document.getElementById("total");
-    
     function calculateTotal() {
-        total.firstChild.nodeValue =  Number(document.getElementById("size").options[document.getElementById("size").selectedIndex].value) + Number(document.getElementById("cheese").options[document.getElementById("cheese").selectedIndex].value) + Number(document.getElementById("sauce").options[document.getElementById("sauce").selectedIndex].value);
+        var total = document.getElementById("total");
+        var sizeCost = Number(document.getElementById("size").options[document.getElementById("size").selectedIndex].value);
+        var cheeseCost = Number(document.getElementById("cheese").options[document.getElementById("cheese").selectedIndex].value);
+        var sauceCost = Number(document.getElementById("sauce").options[document.getElementById("sauce").selectedIndex].value);
+        var toppingsList = document.getElementsByClassName("topping");
+        var count = 0, i, toppingsCost;
+        for (i = 0; i < toppingsList.length; i += 1) {
+            if (toppingsList[i].checked) {
+                count += 1;
+            }
+            toppingsCost = Number((count * 0.99));
+        }
+        total.firstChild.nodeValue = (sizeCost + cheeseCost + sauceCost + toppingsCost).toFixed(2);
     }
-    
-    document.getElementById("size").addEventListener("change", calculateTotal);
-    document.getElementById("cheese").addEventListener("change", calculateTotal);
-    document.getElementById("sauce").addEventListener("change", calculateTotal);
+
+    document.getElementById("prices").addEventListener("change", calculateTotal);
               
 } // end of init
 
