@@ -126,6 +126,19 @@ function init() {
 //    //var email = document.pizzaOrder.email;
 //    email.addEventListener("blur", checkEntry);
     
+    // Alert if they have not chosen Dough
+    
+    function checkDough() {
+        if (document.getElementById("size").childNodes.length < 2) {
+            document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = " Choose a Dough Option First";
+            document.getElementById("firstDoughOption").focus();
+        } else {
+            document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = "";
+        } 
+    }
+    
+    document.getElementById("size").addEventListener("focus", checkDough);
+    
     // Size & Price Options
     
     var handTossed = {
@@ -149,12 +162,16 @@ function init() {
     };
     
     function removeOptions() {
-        while (document.getElementById("size").childNodes.length > 1) {
-            document.getElementById("size").removeChild(document.getElementById("size").childNodes[1]);
+        var sizeElement = document.getElementById("size");
+        while (sizeElement.childNodes.length > 1) {
+            sizeElement.removeChild(sizeElement.childNodes[1]);
         }
     }
     
     function createSizeOptions(event) {
+        document.getElementById("doughLabel").nextElementSibling.firstChild.nodeValue = "";
+        document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = " *";
+        
         var sizes;
         var size;
         
@@ -174,6 +191,7 @@ function init() {
         }
         for (size in sizes) {
             var node = document.createElement("option");
+            node.setAttribute("value", sizes[size]);
             var textnode = document.createTextNode(size + " $" + sizes[size]);
             node.appendChild(textnode);
             document.pizzaOrder.size.appendChild(node); 
@@ -184,7 +202,35 @@ function init() {
     dough.addEventListener("change", removeOptions);
     dough.addEventListener("change", createSizeOptions);
     
-                
+    // Enable Cheese and Sauce Options
+    
+    function enableOptions() {
+        var size = document.getElementById("size");
+        if (size.options[size.selectedIndex].value != "select") {
+            document.pizzaOrder.cheese.removeAttribute("disabled");
+            document.pizzaOrder.sauce.removeAttribute("disabled");
+            document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = "";
+        } else {
+            document.pizzaOrder.cheese.setAttribute("disabled", "true");
+            document.pizzaOrder.sauce.setAttribute("disabled", "true");
+            document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = " Choose a Size";
+        }
+    }
+    
+    document.pizzaOrder.size.addEventListener("change", enableOptions);
+    
+    // Keep Running Total
+    
+    var total = document.getElementById("total");
+    
+    function calculateTotal() {
+        total.firstChild.nodeValue =  Number(document.getElementById("size").options[document.getElementById("size").selectedIndex].value) + Number(document.getElementById("cheese").options[document.getElementById("cheese").selectedIndex].value) + Number(document.getElementById("sauce").options[document.getElementById("sauce").selectedIndex].value);
+    }
+    
+    document.getElementById("size").addEventListener("change", calculateTotal);
+    document.getElementById("cheese").addEventListener("change", calculateTotal);
+    document.getElementById("sauce").addEventListener("change", calculateTotal);
+              
 } // end of init
 
 window.addEventListener("load", init);

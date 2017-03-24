@@ -39,11 +39,9 @@
 
     <div class="container">
       <div class="header clearfix">
-        <nav>
+        <nav class="navbar-fixed-top">
           <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
+            <li role="presentation" class="active"><a href="#" id="total">Total</a></li>
           </ul>
         </nav>
         <img src="napizzaLogo.png">
@@ -116,8 +114,8 @@
               <h3 class="red">Build Your Order</h4>
               <hr>
               <div class="form-group" id="dough">
-                <label>STEP 1: Choose A Dough Option</label><span class="required"> *</span><br>
-                <input type="radio" name="doughOption" value="handTossed">
+                <label id="doughLabel">STEP 1: Choose A Dough Option</label><span class="required"> *</span><br>
+                <input type="radio" name="doughOption" value="handTossed" id="firstDoughOption">
                 <label for="handTossed">Hand Tossed</label><br>
                 <input type="radio" name="doughOption" value="thinCrust">
                 <label for="handTossed">Thin Crust</label><br>
@@ -127,12 +125,12 @@
                 <label for="handTossed">Gluten Free</label>
               </div>
               <div class="form-group">
-              <label for="name">STEP 2: Choose Size</label><span class="required"> *</span><br>
-              <select name="size" id="size"><option value="Select" selected="selected">Select</option></select>
+              <label for="size" id="sizeLabel">STEP 2: Choose Size</label><span class="required"> *</span><br>
+              <select name="size" id="size"><option value="select" selected="selected">Select</option></select>
               </div>
               <div class="form-group">
               <label for="name">STEP 3: Cheese Options</label><br>
-              <select name="cheese">
+              <select name="cheese" id="cheese" disabled>
                   <option name="light" value="0">Light: no charge</option>
                   <option name="normal" value="0" selected="selected">Normal: no charge</option>
                   <option name="extra" value="2.99">Extra: $2.99</option>
@@ -141,7 +139,7 @@
               </div>
               <div class="form-group">
               <label for="name">STEP 4: Sauce Options</label><br>
-              <select name="sauce">
+              <select name="sauce" id="sauce" disabled>
                   <option name="regular" value="0" selected="selected">Regular Tomato: no charge</option>
                   <option name="hearty" value=".99">Hearty Tomato: $0.99</option>
                   <option name="bbq" value="1.99">BBQ Sauce: $1.99</option>

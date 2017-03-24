@@ -2,7 +2,10 @@
 
 .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
     color: #dec09a;
-    background-color: #a22025;   
+    background-color: #a22025;
+    margin: 50px;
+    width: 80px;
+    text-align: center;
 }
 
 a {
