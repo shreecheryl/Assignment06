@@ -4,7 +4,7 @@ function init() {
     
     function required(event) {
         if (event.target.value === "") {
-            event.target.nextElementSibling.firstChild.nodeValue = "Required field";
+            event.target.nextElementSibling.firstChild.nodeValue = " Required field";
             event.target.focus();
         } else {
             event.target.nextElementSibling.firstChild.nodeValue = "";
@@ -14,15 +14,15 @@ function init() {
     function onlyLetters(event) {
         var str = event.target.value, patt = /[0-9]/g;
         if (patt.test(str)) {
-            event.target.nextElementSibling.firstChild.nodeValue = "This field can only contain letters";
+            event.target.nextElementSibling.firstChild.nodeValue = " This field can only contain letters";
             event.target.focus();
         }
     }
     
     function stateCheck(event) {
-        var state = event.target.value, patt = /[A-Z]{2}/i;
+        var state = event.target.value, patt = /^[A-Z]{2}$/i;
         if (!patt.test(state)) {
-            event.target.nextElementSibling.firstChild.nodeValue = "Invalid entry";
+            event.target.nextElementSibling.firstChild.nodeValue = " Invalid entry";
             event.target.value = "";
             event.target.focus();
         } else {
@@ -35,7 +35,7 @@ function init() {
         var chosenOption = document.pizzaOrder.addressType.selectedIndex;
         var addressType = document.pizzaOrder.addressType.options[chosenOption].value;
         if (addressType === "select") {
-            event.target.nextElementSibling.firstChild.nodeValue = "Please select an option";
+            event.target.nextElementSibling.firstChild.nodeValue = " Please select an option";
             event.target.focus();
         } else if (addressType === "other") {
             event.target.nextElementSibling.firstChild.nodeValue = "";
@@ -52,15 +52,18 @@ function init() {
         case "zipCode":
             patt = /^[0-9]{5}(?:-[0-9]{4})?$/;
             break;
+        case "billingZipCode":
+            patt = /^[0-9]{5}(?:-[0-9]{4})?$/;
+            break;
         case "phone":
-            patt = /((\(\d{3}\) ?)|(\d{3}-))?\d{3}-\d{4}/;
+            patt = /((\(\d{3}\)?)|(\d{3}-))?\d{3}-\d{4}/;
             break;
         case "email":
             patt = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             break;
         }
         if (!patt.test(event.target.value)) {
-            event.target.nextElementSibling.firstChild.nodeValue = "Invalid entry";
+            event.target.nextElementSibling.firstChild.nodeValue = " Invalid entry";
             event.target.value = "";
             event.target.focus();
         } else {
@@ -198,6 +201,8 @@ function init() {
             node.appendChild(textnode);
             document.pizzaOrder.size.appendChild(node);
         }
+        
+        document.pizzaOrder.size.focus();
     }
     
     var dough = document.getElementById("dough");
@@ -249,25 +254,60 @@ function init() {
         var orderStatus = window.confirm("Are you sure you are finished with building your pizza?");
         if (orderStatus) {
             document.getElementById("billing").removeAttribute("class");
+            document.getElementById("sameAsDelivery").focus();
         }
     });
     
     // Populate Billing Info with Delivery Info
     
-    function populateBillingInfo () {
+    function populateBillingInfo() {
         if (document.getElementById("sameAsDelivery").checked) {
             document.pizzaOrder.billingName.value = document.pizzaOrder.name.value;
+            document.pizzaOrder.billingName.nextElementSibling.innerHTML = "";
             document.pizzaOrder.billingAddress.value = document.pizzaOrder.address.value;
+            document.pizzaOrder.billingAddress.nextElementSibling.innerHTML = "";
             document.pizzaOrder.billingAptNumber.value = document.pizzaOrder.aptNumber.value;
             document.pizzaOrder.billingCity.value = document.pizzaOrder.city.value;
+            document.pizzaOrder.billingCity.nextElementSibling.innerHTML = "";
             document.pizzaOrder.billingState.value = document.pizzaOrder.state.value;
+            document.pizzaOrder.billingState.nextElementSibling.innerHTML = "";
             document.pizzaOrder.billingZipCode.value = document.pizzaOrder.zipCode.value;
+            document.pizzaOrder.billingZipCode.nextElementSibling.innerHTML = "";
+        } else {
+            document.pizzaOrder.billingName.value = "";
+            document.pizzaOrder.billingName.nextElementSibling.innerHTML = " *";
+            document.pizzaOrder.billingAddress.value = "";
+            document.pizzaOrder.billingAddress.nextElementSibling.innerHTML = " *";
+            document.pizzaOrder.billingAptNumber.value = "";
+            document.pizzaOrder.billingCity.value = "";
+            document.pizzaOrder.billingCity.nextElementSibling.innerHTML = " *";
+            document.pizzaOrder.billingState.value = "";
+            document.pizzaOrder.billingState.nextElementSibling.innerHTML = " *";
+            document.pizzaOrder.billingZipCode.value = "";
+            document.pizzaOrder.billingZipCode.nextElementSibling.innerHTML = " *";
         }
     }
     
     document.getElementById("sameAsDelivery").addEventListener("change", populateBillingInfo);
     
-              
+    // Validate Billing Info
+    
+    var billingname = document.pizzaOrder.billingName;
+    billingname.addEventListener("blur", required);
+    billingname.addEventListener("blur", onlyLetters);
+    
+    var billingaddress = document.pizzaOrder.billingAddress;
+    billingaddress.addEventListener("blur", required);
+    
+    var billingcity = document.pizzaOrder.billingCity;
+    billingcity.addEventListener("blur", required);
+    
+    var billingstate = document.pizzaOrder.billingState;
+    billingstate.addEventListener("blur", stateCheck);
+    
+    var billingzip = document.pizzaOrder.billingZipCode;
+    billingzip.addEventListener("blur", checkEntry);
+    
 } // end of init
 
 window.addEventListener("load", init);

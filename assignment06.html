@@ -50,12 +50,12 @@
 
       <div class="row marketing">
         <div class="col-lg-10">
+        <h4 class="red" id="delivery">Delivery Information</h4>
         <p><span class="required">* = Required Field</span></p>
             <form name="pizzaOrder">
               <div class="form-group">
                 <label for="name">Name:</label><br>
-                <input type="text" class="form-control" name="name">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="name"><span class="required"> *</span>
               </div>
               <div class="form-group">
               <label for="addressType">Address Type:</label><br>
@@ -68,18 +68,15 @@
                   <option value="hotel">Hotel</option>
                   <option value="dorm">Dorm</option>
                   <option value="other" id="other">Other</option>
-              </select>
-              <span class="required"> *</span>
+              </select><span class="required"> *</span>
               </div>
               <div class="form-group hidden" id="addressType2">
                 <label for="otherAddressType">Please specify address type:</label><br>
-                <input type="text" class="form-control" name="otherAddressType">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="otherAddressType"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="address">Street Address:</label><br>
-                <input type="text" class="form-control" name="address">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="address"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="aptNumber">Apt, Suite or Room Number:</label><br>
@@ -87,31 +84,26 @@
               </div>
               <div class="form-group">
                 <label for="city">City:</label><br>
-                <input type="text" class="form-control" name="city">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="city"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="state">State:</label><br>
-                <input type="text" class="form-control" name="state">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="state"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="zipCode">Zip Code:</label><br>
-                <input type="text" class="form-control" name="zipCode">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="zipCode"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="phone">Phone:</label><br>
-                <input type="text" class="form-control" name="phone" placeholder="Ex: 999-999-9999">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="phone" placeholder="Ex: 999-999-9999"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="email">Email address:</label><br>
-                <input type="email" class="form-control" name="email">
-                <span class="required"> *</span>
+                <input type="email" class="form-control" name="email"><span class="required"> *</span>
               </div>
               
-              <h3 class="red">Build Your Order</h4>
+              <h4 class="red">Build Your Order</h4>
               <hr>
               <div class="form-group" id="dough">
                 <label id="doughLabel">STEP 1: Choose A Dough Option</label><span class="required"> *</span><br>
@@ -165,20 +157,18 @@
               <input type="button" class="btn btn-default" value="Finished Building Pizza" id="finished"/>
               
               <div id="billing" class="hidden">
-                <h3 class="red">Billing Information</h4>
+                <h4 class="red">Billing Information</h4>
                 <hr>
               <div class="form-group">
                 <label for="sameAsDelivery"></label><input type="checkbox" id="sameAsDelivery" /> Same as delivery information</label>
               </div>
               <div class="form-group">
                 <label for="billingName">Name:</label><br>
-                <input type="text" class="form-control" name="billingName">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="billingName"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="billingAddress">Street Address:</label><br>
-                <input type="text" class="form-control" name="billingAddress">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="billingAddress"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="billingAptNumber">Apt, Suite or Room Number:</label><br>
@@ -186,18 +176,15 @@
               </div>
               <div class="form-group">
                 <label for="billingCity">City:</label><br>
-                <input type="text" class="form-control" name="billingCity">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="billingCity"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="billingState">State:</label><br>
-                <input type="text" class="form-control" name="billingState">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="billingState"><span class="required"> *</span>
               </div>
               <div class="form-group">
                 <label for="billingZipCode">Zip Code:</label><br>
-                <input type="text" class="form-control" name="billingZipCode">
-                <span class="required"> *</span>
+                <input type="text" class="form-control" name="billingZipCode"><span class="required"> *</span>
               </div>
                   
               </div> <!-- End of billing info div -->

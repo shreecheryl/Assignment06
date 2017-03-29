@@ -6,14 +6,22 @@
     margin: 50px;
     width: 80px;
     text-align: center;
+    font-weight: bold;
+    letter-spacing: .03em;
+    font-size: 1.1em;
 }
 
 a {
     color: #a22025;
 }
 
-h3 {
+h4 {
     margin-top: 50px;
+}
+
+h4#delivery {
+    margin-top: 0;
+    margin-bottom: 25px;
 }
 
 .red {
