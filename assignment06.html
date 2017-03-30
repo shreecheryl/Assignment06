@@ -59,7 +59,7 @@
               </div>
               <div class="form-group">
               <label for="addressType">Address Type:</label><br>
-              <select name="addressType" id="addressType">
+              <select class="form-control" name="addressType" id="addressType">
                   <option value="select" selected="selected">Select</option>
                   <option value="house">House</option>
                   <option value="apartment">Apartment</option>
@@ -119,11 +119,11 @@
               <div id="prices">
               <div class="form-group">
               <label for="size" id="sizeLabel">STEP 2: Choose Size</label><span class="required"> *</span><br>
-              <select name="size" id="size"><option value="select" selected="selected">Select</option></select>
+              <select class="form-control" name="size" id="size"><option value="0" selected="selected">Select</option></select>
               </div>
               <div class="form-group">
               <label for="name">STEP 3: Cheese Options</label><br>
-              <select name="cheese" id="cheese" disabled>
+              <select class="form-control" name="cheese" id="cheese" disabled>
                   <option name="light" value="0">Light: no charge</option>
                   <option name="normal" value="0" selected="selected">Normal: no charge</option>
                   <option name="extra" value="2.99">Extra: $2.99</option>
@@ -132,7 +132,7 @@
               </div>
               <div class="form-group">
               <label for="name">STEP 4: Sauce Options</label><br>
-              <select name="sauce" id="sauce" disabled>
+              <select class="form-control" name="sauce" id="sauce" disabled>
                   <option name="regular" value="0" selected="selected">Regular Tomato: no charge</option>
                   <option name="hearty" value=".99">Hearty Tomato: $0.99</option>
                   <option name="bbq" value="1.99">BBQ Sauce: $1.99</option>
@@ -156,7 +156,7 @@
 
               <input type="button" class="btn btn-default" value="Finished Building Pizza" id="finished"/>
               
-              <div id="billing" class="hidden">
+              <div id="billing">
                 <h4 class="red">Billing Information</h4>
                 <hr>
               <div class="form-group">
@@ -186,7 +186,45 @@
                 <label for="billingZipCode">Zip Code:</label><br>
                 <input type="text" class="form-control" name="billingZipCode"><span class="required"> *</span>
               </div>
-                  
+              <div class="form-group">
+                <label for="ccNumber">Credit Card Number:</label><br>
+                <input type="text" class="form-control" name="ccNumber">
+              </div>
+              <div class="form-group">
+                <label for="CVC">CVC Code:</label><br>
+                <input type="text" class="form-control" name="CVC">
+              </div>
+              <div class="form-group">
+                <label for="expMonth">Expiration Month:</label><br>
+                <select class="form-control" name="expMonth">
+                    <option value="select">Select</option>
+                    <option value="0">January</option>
+                    <option value="1">February</option>
+                    <option value="2">March</option>
+                    <option value="3">April</option>
+                    <option value="4">May</option>
+                    <option value="5">June</option>
+                    <option value="6">July</option>
+                    <option value="7">August</option>
+                    <option value="8">September</option>
+                    <option value="9">October</option>
+                    <option value="10">November</option>
+                    <option value="11">December</option>
+                </select><span class="red"></span>
+              </div>
+              <div class="form-group">
+                <label for="expYear">Expiration Year:</label><br>
+                <select class="form-control" name="expYear">
+                    <option value="select">Select</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-default" disabled id="submitOrder">Submit</button>   
               </div> <!-- End of billing info div -->
             </form>
         </div>
