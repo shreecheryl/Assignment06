@@ -275,6 +275,7 @@ function init() {
             document.pizzaOrder.billingState.nextElementSibling.innerHTML = "";
             document.pizzaOrder.billingZipCode.value = document.pizzaOrder.zipCode.value;
             document.pizzaOrder.billingZipCode.nextElementSibling.innerHTML = "";
+            document.pizzaOrder.ccNumber.focus();
         } else {
             document.pizzaOrder.billingName.value = "";
             document.pizzaOrder.billingName.nextElementSibling.innerHTML = " *";
@@ -310,9 +311,47 @@ function init() {
     var billingzip = document.pizzaOrder.billingZipCode;
     billingzip.addEventListener("blur", checkEntry);
 
-    // Validate Credit Card Number
+    // Display Credit Card Type
+    
+    var ccNo = document.pizzaOrder.ccNumber;
+    function displayCCType() {
+        if (ccNo.value.length == 2 && ccNo.value == 37) {
+            ccNo.nextElementSibling.innerHTML = " AMEX";
+        } else if (ccNo.value.length == 1 && ccNo.value == 4) {
+            ccNo.nextElementSibling.innerHTML = " VISA";
+        } else if (ccNo.value.length == 2 && ccNo.value >= 51 && ccNo.value <= 55) {
+            ccNo.nextElementSibling.innerHTML = " MC";
+        } else if (ccNo.value.length == 3 && ccNo.nextElementSibling.innerHTML == " *") {
+            ccNo.value = "";
+            ccNo.nextElementSibling.innerHTML = " Invalid Card Number";
+            ccNo.focus();
+        }
+    }
+    
+    ccNo.addEventListener("input", displayCCType);
 
-
+    // Validate Only Digits and Correct Length
+    
+    function onlyDigits(event) {
+        var str = event.target.value, patt = /[a-z]/ig;
+        if (patt.test(str)) {
+            event.target.nextElementSibling.innerHTML = " This field can only contain digits";
+            event.target.focus();
+        } else {}
+    }
+    
+    function checkLength() {
+        ccNo.value = ccNo.value.replace(/ +/g, "");
+        if ((ccNo.value.charAt(0) == 3 && ccNo.value.length != 15) || (ccNo.value.charAt(0) == 4 && (ccNo.value.length != 16 || ccNo.value.length != 13)) || (ccNo.value.charAt(0) == 5 && ccNo.value.length != 16)) {
+            ccNo.value = "";
+            ccNo.nextElementSibling.innerHTML = " Invalid Card Number";
+            ccNo.focus();
+        }
+    }
+    
+    ccNo.addEventListener("blur", required);
+    ccNo.addEventListener("blur", onlyDigits);
+    ccNo.addEventListener("blur", checkLength);
 
     // Check Expiration Date
 
