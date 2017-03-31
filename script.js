@@ -4,17 +4,17 @@ function init() {
     
     function required(event) {
         if (event.target.value === "") {
-            event.target.nextElementSibling.firstChild.nodeValue = " Required field";
+            event.target.nextElementSibling.innerHTML = " Required field";
             event.target.focus();
         } else {
-            event.target.nextElementSibling.firstChild.nodeValue = "";
+            event.target.nextElementSibling.innerHTML = "";
         }
     }
     
     function onlyLetters(event) {
         var str = event.target.value, patt = /[0-9]/g;
         if (patt.test(str)) {
-            event.target.nextElementSibling.firstChild.nodeValue = " This field can only contain letters";
+            event.target.nextElementSibling.innerHTML = " This field can only contain letters";
             event.target.focus();
         }
     }
@@ -22,26 +22,25 @@ function init() {
     function stateCheck(event) {
         var state = event.target.value, patt = /^[A-Z]{2}$/i;
         if (!patt.test(state)) {
-            event.target.nextElementSibling.firstChild.nodeValue = " Invalid entry";
+            event.target.nextElementSibling.innerHTML = " Invalid entry";
             event.target.value = "";
             event.target.focus();
         } else {
             event.target.value = event.target.value.toUpperCase();
-            event.target.nextElementSibling.firstChild.nodeValue = "";
+            event.target.nextElementSibling.innerHTML = "";
         }
     }
     
     function checkAddressType() {
-        var chosenOption = document.pizzaOrder.addressType.selectedIndex;
-        var addressType = document.pizzaOrder.addressType.options[chosenOption].value;
+        var addressType = document.pizzaOrder.addressType.value;
         if (addressType === "select") {
-            event.target.nextElementSibling.firstChild.nodeValue = " Please select an option";
+            event.target.nextElementSibling.innerHTML = " Please select an option";
             event.target.focus();
         } else if (addressType === "other") {
-            event.target.nextElementSibling.firstChild.nodeValue = "";
+            event.target.nextElementSibling.innerHTML = "";
             document.pizzaOrder.otherAddressType.focus();
         } else {
-            event.target.nextElementSibling.firstChild.nodeValue = "";
+            event.target.nextElementSibling.innerHTML = "";
             document.pizzaOrder.address.focus();
         }
     }
@@ -63,11 +62,11 @@ function init() {
             break;
         }
         if (!patt.test(event.target.value)) {
-            event.target.nextElementSibling.firstChild.nodeValue = " Invalid entry";
+            event.target.nextElementSibling.innerHTML = " Invalid entry";
             event.target.value = "";
             event.target.focus();
         } else {
-            event.target.nextElementSibling.firstChild.nodeValue = "";
+            event.target.nextElementSibling.innerHTML = "";
         }
     }
     
@@ -135,10 +134,10 @@ function init() {
     
     function checkDough() {
         if (document.getElementById("size").childNodes.length < 2) {
-            document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = " Choose a Dough Option First";
+            document.getElementById("sizeLabel").nextElementSibling.innerHTML = " Choose a Dough Option First";
             document.getElementById("firstDoughOption").focus();
         } else {
-            document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = "";
+            document.getElementById("sizeLabel").nextElementSibling.innerHTML = "";
         } 
     }
     
@@ -174,8 +173,8 @@ function init() {
     }
     
     function createSizeOptions(event) {
-        document.getElementById("doughLabel").nextElementSibling.firstChild.nodeValue = "";
-        document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = " *";
+        document.getElementById("doughLabel").nextElementSibling.innerHTML = "";
+        document.getElementById("sizeLabel").nextElementSibling.innerHTML = " *";
         
         var sizes;
         var size;
@@ -213,14 +212,14 @@ function init() {
     
     function enableOptions() {
         var size = document.getElementById("size");
-        if (size.options[size.selectedIndex].value != "select") {
+        if (size.value != 0) {
             document.pizzaOrder.cheese.removeAttribute("disabled");
             document.pizzaOrder.sauce.removeAttribute("disabled");
-            document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = "";
-        } else {
+            document.getElementById("sizeLabel").nextElementSibling.innerHTML = "";
+        } else if (size.value == 0) {
             document.pizzaOrder.cheese.setAttribute("disabled", "true");
             document.pizzaOrder.sauce.setAttribute("disabled", "true");
-            document.getElementById("sizeLabel").nextElementSibling.firstChild.nodeValue = " Choose a Size";
+            document.getElementById("sizeLabel").nextElementSibling.innerHTML = " Choose a Size";
         }
     }
     
@@ -230,9 +229,9 @@ function init() {
     
     function calculateTotal() {
         var total = document.getElementById("total");
-        var sizeCost = Number(document.getElementById("size").options[document.getElementById("size").selectedIndex].value);
-        var cheeseCost = Number(document.getElementById("cheese").options[document.getElementById("cheese").selectedIndex].value);
-        var sauceCost = Number(document.getElementById("sauce").options[document.getElementById("sauce").selectedIndex].value);
+        var sizeCost = Number(document.getElementById("size").value);
+        var cheeseCost = Number(document.getElementById("cheese").value);
+        var sauceCost = Number(document.getElementById("sauce").value);
         var toppingsList = document.getElementsByClassName("topping");
         var count = 0, i, toppingsCost;
         for (i = 0; i < toppingsList.length; i += 1) {
@@ -241,9 +240,9 @@ function init() {
             }
             toppingsCost = Number((count * 0.99));
         }
-        total.firstChild.nodeValue = (sizeCost + cheeseCost + sauceCost + toppingsCost).toFixed(2);
-        if (isNaN(total.firstChild.nodeValue)) {
-            total.firstChild.nodeValue = "Total";
+        total.innerHTML = (sizeCost + cheeseCost + sauceCost + toppingsCost).toFixed(2);
+        if (isNaN(total.innerHTML)) {
+            total.innerHTML = "Total";
         }
     }
 
@@ -323,9 +322,9 @@ function init() {
         var theYear = theDate.getFullYear();
         var expMo = document.pizzaOrder.expMonth;
         var expYr = document.pizzaOrder.expYear;
-        if (expYr.options[expYr.selectedIndex].value == "select") {
+        if (expYr.value == "select") {
             expYr.focus();
-        } else if (expMo.options[expMo.selectedIndex].value > theMonth || (expMo.options[expMo.selectedIndex].value < theMonth && expYr.options[expYr.selectedIndex].value > theYear) || (expMo.options[expMo.selectedIndex].value < theMonth && expYr.options[expYr.selectedIndex].value > theYear)) {
+        } else if (expMo.value >= theMonth || (expMo.value <= theMonth && expYr.value > theYear) || (expMo.value <= theMonth && expYr.value > theYear)) {
             document.getElementById("submitOrder").removeAttribute("disabled");
             document.getElementById("submitOrder").focus();
             expMo.nextElementSibling.innerHTML = "";   
