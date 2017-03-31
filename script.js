@@ -322,7 +322,6 @@ function init() {
         } else if (ccNo.value.length == 2 && ccNo.value >= 51 && ccNo.value <= 55) {
             ccNo.nextElementSibling.innerHTML = " MC";
         } else if (ccNo.value.length == 3 && ccNo.nextElementSibling.innerHTML == " *") {
-            ccNo.value = "";
             ccNo.nextElementSibling.innerHTML = " Invalid Card Number";
             ccNo.focus();
         }
@@ -343,15 +342,35 @@ function init() {
     function checkLength() {
         ccNo.value = ccNo.value.replace(/ +/g, "");
         if ((ccNo.value.charAt(0) == 3 && ccNo.value.length != 15) || (ccNo.value.charAt(0) == 4 && (ccNo.value.length != 16 || ccNo.value.length != 13)) || (ccNo.value.charAt(0) == 5 && ccNo.value.length != 16)) {
-            ccNo.value = "";
             ccNo.nextElementSibling.innerHTML = " Invalid Card Number";
             ccNo.focus();
         }
     }
     
-    ccNo.addEventListener("blur", required);
+    function checkLuhn() {
+        var ccDigits = ccNo.value.split("").reverse();
+        for (var i = 1; i < ccDigits.length; i += 2) {
+             ccDigits[i] = ccDigits[i] * 2;
+        }
+        var newString = ccDigits.join("");
+        var singleDigits = newString.split("");
+        var digitsTotal = 0;
+        for (var j = 0; j < singleDigits.length; j++) {
+            digitsTotal += Number(singleDigits[j]);
+        }
+        if ((digitsTotal % 10) == 0) {
+            ccNo.nextElementSibling.innerHTML = "";
+            document.pizzaOrder.CVC.focus();
+        } else {
+            ccNo.nextElementSibling.innerHTML = " Invalid Credit Card Number";
+            ccNo.focus();
+        }
+    }
+    
+    //ccNo.addEventListener("blur", required);
     ccNo.addEventListener("blur", onlyDigits);
     ccNo.addEventListener("blur", checkLength);
+    ccNo.addEventListener("blur", checkLuhn);
 
     // Check Expiration Date
 
