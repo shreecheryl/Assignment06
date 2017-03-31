@@ -39,7 +39,7 @@
 
     <div class="container">
       <div class="header clearfix">
-        <nav class="navbar-fixed-top">
+        <nav class="navbar-fixed-top col-md-9">
           <ul class="nav nav-pills pull-right">
             <li role="presentation" class="active"><a href="#" id="total">Total</a></li>
           </ul>
@@ -105,6 +105,7 @@
               
               <h4 class="red">Build Your Order</h4>
               <hr>
+              <div id="prices">
               <div class="form-group" id="dough">
                 <label id="doughLabel">STEP 1: Choose A Dough Option</label><span class="required"> *</span><br>
                 <input type="radio" name="doughOption" value="handTossed" id="firstDoughOption">
@@ -116,7 +117,6 @@
                 <input type="radio" name="doughOption" value="glutenFree">
                 <label for="handTossed">Gluten Free</label>
               </div>
-              <div id="prices">
               <div class="form-group">
               <label for="size" id="sizeLabel">STEP 2: Choose Size</label><span class="required"> *</span><br>
               <select class="form-control" name="size" id="size"><option value="0" selected="selected">Select</option></select>
@@ -156,7 +156,7 @@
 
               <input type="button" class="btn btn-default" value="Finished Building Pizza" id="finished"/>
               
-              <div id="billing">
+              <div id="billing" class="hidden">
                 <h4 class="red">Billing Information</h4>
                 <hr>
               <div class="form-group">

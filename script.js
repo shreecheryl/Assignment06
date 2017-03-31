@@ -74,62 +74,62 @@ function init() {
     // Check Name Entry
     
     var customerName = document.pizzaOrder.name;
-    //customerName.addEventListener("blur", required);
-    //customerName.addEventListener("blur", onlyLetters);
+    customerName.addEventListener("blur", required);
+    customerName.addEventListener("blur", onlyLetters);
     
     // Check Address Type
     
     var addressType = document.pizzaOrder.addressType;
-    //addressType.addEventListener("blur", checkAddressType);
-    //addressType.addEventListener("change", checkAddressType);
+    addressType.addEventListener("blur", checkAddressType);
+    addressType.addEventListener("change", checkAddressType);
     
     // Display input field if they select "other" for Address Type
     
     var selection = document.pizzaOrder.addressType;
-//    selection.addEventListener("change", function () {
-//        var other = document.getElementById("addressType2");
-//        if (document.getElementById("other").selected) {
-//            other.setAttribute("class", "form-group indent");
-//            document.pizzaOrder.otherAddressType.focus();
-//        } else {
-//            other.setAttribute("class", "form-group hidden");
-//        }    
-//    });
+    selection.addEventListener("change", function () {
+        var other = document.getElementById("addressType2");
+        if (document.getElementById("other").selected) {
+            other.setAttribute("class", "form-group indent");
+            document.pizzaOrder.otherAddressType.focus();
+        } else {
+            other.setAttribute("class", "form-group hidden");
+        }    
+    });
     
     // Check Specify Address Type Entry
     
     var otherAddressType = document.pizzaOrder.otherAddressType;
-    //otherAddressType.addEventListener("blur", required);
+    otherAddressType.addEventListener("blur", required);
     
     // Check Address Entry
     
     var address = document.pizzaOrder.address;
-    //address.addEventListener("blur", required);
+    address.addEventListener("blur", required);
     
     // Check City Entry
     
     var city = document.pizzaOrder.city;
-    //city.addEventListener("blur", required);
+    city.addEventListener("blur", required);
     
     // Check State Entry
     
     var state = document.pizzaOrder.state;
-    //state.addEventListener("blur", stateCheck);
+    state.addEventListener("blur", stateCheck);
     
     // Check Zip Code Entry
     
     var zip = document.pizzaOrder.zipCode;
-    //zip.addEventListener("blur", checkEntry);           
+    zip.addEventListener("blur", checkEntry);           
     
     // Check Phone Number Entry
     
     var phone = document.pizzaOrder.phone;
-    //phone.addEventListener("blur", checkEntry);
+    phone.addEventListener("blur", checkEntry);
                 
     // Check Email Entry
     
     var email = document.pizzaOrder.email;
-    //email.addEventListener("blur", checkEntry);
+    email.addEventListener("blur", checkEntry);
     
     // Alert if they have not chosen Dough
     
@@ -142,7 +142,7 @@ function init() {
         } 
     }
     
-    //document.getElementById("size").addEventListener("focus", checkDough);
+    document.getElementById("size").addEventListener("focus", checkDough);
     
     // Size & Price Options
     
@@ -206,8 +206,8 @@ function init() {
     }
     
     var dough = document.getElementById("dough");
-    //dough.addEventListener("change", removeOptions);
-    //dough.addEventListener("change", createSizeOptions);
+    dough.addEventListener("change", removeOptions);
+    dough.addEventListener("change", createSizeOptions);
     
     // Enable Cheese and Sauce Options
     
@@ -224,7 +224,7 @@ function init() {
         }
     }
     
-    //document.pizzaOrder.size.addEventListener("change", enableOptions);
+    document.pizzaOrder.size.addEventListener("change", enableOptions);
     
     // Keep Running Total
     
@@ -242,21 +242,24 @@ function init() {
             toppingsCost = Number((count * 0.99));
         }
         total.firstChild.nodeValue = (sizeCost + cheeseCost + sauceCost + toppingsCost).toFixed(2);
+        if (isNaN(total.firstChild.nodeValue)) {
+            total.firstChild.nodeValue = "Total";
+        }
     }
 
-    //document.getElementById("prices").addEventListener("change", calculateTotal);
+    document.getElementById("prices").addEventListener("change", calculateTotal);
     
     // Confirm Finished Building Pizza
     
     var finished = document.getElementById("finished");
     
-//    finished.addEventListener("click", function () {
-//        var orderStatus = window.confirm("Are you sure you are finished with building your pizza?");
-//        if (orderStatus) {
-//            document.getElementById("billing").removeAttribute("class");
-//            document.getElementById("sameAsDelivery").focus();
-//        }
-//    });
+    finished.addEventListener("click", function () {
+        var orderStatus = window.confirm("Are you sure you are finished with building your pizza?");
+        if (orderStatus) {
+            document.getElementById("billing").removeAttribute("class");
+            document.getElementById("sameAsDelivery").focus();
+        }
+    });
     
     // Populate Billing Info with Delivery Info
     
@@ -288,25 +291,25 @@ function init() {
         }
     }
     
-    //document.getElementById("sameAsDelivery").addEventListener("change", populateBillingInfo);
+    document.getElementById("sameAsDelivery").addEventListener("change", populateBillingInfo);
     
     // Validate Billing Info
     
     var billingname = document.pizzaOrder.billingName;
-    //billingname.addEventListener("blur", required);
-    //billingname.addEventListener("blur", onlyLetters);
+    billingname.addEventListener("blur", required);
+    billingname.addEventListener("blur", onlyLetters);
     
     var billingaddress = document.pizzaOrder.billingAddress;
-    //billingaddress.addEventListener("blur", required);
+    billingaddress.addEventListener("blur", required);
     
     var billingcity = document.pizzaOrder.billingCity;
-    //billingcity.addEventListener("blur", required);
+    billingcity.addEventListener("blur", required);
     
     var billingstate = document.pizzaOrder.billingState;
-    //billingstate.addEventListener("blur", stateCheck);
+    billingstate.addEventListener("blur", stateCheck);
     
     var billingzip = document.pizzaOrder.billingZipCode;
-    //billingzip.addEventListener("blur", checkEntry);
+    billingzip.addEventListener("blur", checkEntry);
 
     // Validate Credit Card Number
 
