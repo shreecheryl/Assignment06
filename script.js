@@ -92,7 +92,7 @@ function init() {
             document.pizzaOrder.otherAddressType.focus();
         } else {
             other.setAttribute("class", "form-group hidden");
-        }    
+        }   
     });
     
     // Check Specify Address Type Entry
@@ -409,12 +409,24 @@ function init() {
         var theYear = theDate.getFullYear();
         var expMo = document.pizzaOrder.expMonth;
         var expYr = document.pizzaOrder.expYear;
-        if (expYr.value == "select") {
+        if (expMo.value < 0) {
+            expMo.focus();
+            expMo.nextElementSibling.innerHTML = " Required Field";
+            document.getElementById("submitOrder").setAttribute("disabled", true);
+        } else if (expMo.value >= 0 && expYr.value === "-1") {
             expYr.focus();
+            expMo.nextElementSibling.innerHTML = "";
+            expYr.nextElementSibling.innerHTML = " *";
+            document.getElementById("submitOrder").setAttribute("disabled", true);
+        } else if (expYr.value < 0) { 
+            expYr.focus();
+            expMo.nextElementSibling.innerHTML = " Required Field";
+            document.getElementById("submitOrder").setAttribute("disabled", true);
         } else if (expMo.value >= theMonth || (expMo.value <= theMonth && expYr.value > theYear) || (expMo.value <= theMonth && expYr.value > theYear)) {
             document.getElementById("submitOrder").removeAttribute("disabled");
             document.getElementById("submitOrder").focus();
-            expMo.nextElementSibling.innerHTML = "";   
+            expMo.nextElementSibling.innerHTML = "";
+            expYr.nextElementSibling.innerHTML = "";
         } else {
             expMo.nextElementSibling.innerHTML = " Invalid Expiration Date";
             document.getElementById("submitOrder").setAttribute("disabled", true);
