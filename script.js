@@ -4,7 +4,7 @@ function init() {
     
     function required(event) {
         if (event.target.value === "") {
-            event.target.nextElementSibling.innerHTML = " Required field";
+            event.target.nextElementSibling.innerHTML = " Required Field";
             event.target.focus();
         } else {
             event.target.nextElementSibling.innerHTML = "";
@@ -22,7 +22,7 @@ function init() {
     function stateCheck(event) {
         var state = event.target.value, patt = /^[A-Z]{2}$/i;
         if (!patt.test(state)) {
-            event.target.nextElementSibling.innerHTML = " Invalid entry";
+            event.target.nextElementSibling.innerHTML = " Invalid Entry";
             event.target.value = "";
             event.target.focus();
         } else {
@@ -62,7 +62,7 @@ function init() {
             break;
         }
         if (!patt.test(event.target.value)) {
-            event.target.nextElementSibling.innerHTML = " Invalid entry";
+            event.target.nextElementSibling.innerHTML = " Invalid Entry";
             event.target.value = "";
             event.target.focus();
         } else {
@@ -349,7 +349,7 @@ function init() {
         // end for Luhn formula
         
         if (ccNo.value === "") {
-            ccNo.nextElementSibling.innerHTML = " Required field";
+            ccNo.nextElementSibling.innerHTML = " Required Field";
             ccNo.focus();
         } else if (patt.test(ccNo.value)) {
             ccNo.nextElementSibling.innerHTML = " This field can only contain digits";
@@ -376,7 +376,30 @@ function init() {
         }
     }
     
-    ccNo.addEventListener("blur", validateCC);  
+    ccNo.addEventListener("blur", validateCC);
+    
+    // Check CVC code
+    
+    var CVC = document.pizzaOrder.CVC;
+    
+    function checkCVC() {
+        var patt;
+        if (ccNo.value.charAt(0) == "3") {
+            patt = /^[0-9]{4}$/;
+        } else {
+            patt = /^[0-9]{3}$/;
+        }
+        if (!patt.test(CVC.value)) {
+            CVC.nextElementSibling.innerHTML = " Invalid Entry";
+            CVC.focus();
+        } else {
+            CVC.nextElementSibling.innerHTML = "";
+        }
+    }
+    
+    CVC.addEventListener("blur", required);
+    CVC.addEventListener("blur", checkCVC);
+    
 
     // Check Expiration Date
 
@@ -401,6 +424,14 @@ function init() {
 
     document.pizzaOrder.expYear.addEventListener("change", checkExpDate);
     document.pizzaOrder.expMonth.addEventListener("change", checkExpDate);
+    
+    // Confirmation Alert
+    
+    function confirmOrder() {
+        window.alert("Congratulations! Your pizza is on it's way!")
+    }
+    
+    document.getElementById("submitOrder").addEventListener("click", confirmOrder);
     
 } // end of init
 
