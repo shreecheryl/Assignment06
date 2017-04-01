@@ -315,13 +315,13 @@ function init() {
     
     var ccNo = document.pizzaOrder.ccNumber;
     function displayCCType() {
-        if (ccNo.value.length == 2 && ccNo.value == 37) {
+        if (ccNo.value.length === 2 && ccNo.value == 37) {
             ccNo.nextElementSibling.innerHTML = " AMEX";
-        } else if (ccNo.value.length == 1 && ccNo.value == 4) {
+        } else if (ccNo.value.length === 1 && ccNo.value == 4) {
             ccNo.nextElementSibling.innerHTML = " VISA";
-        } else if (ccNo.value.length == 2 && ccNo.value >= 51 && ccNo.value <= 55) {
+        } else if (ccNo.value.length === 2 && ccNo.value >= 51 && ccNo.value <= 55) {
             ccNo.nextElementSibling.innerHTML = " MC";
-        } else if (ccNo.value.length == 3 && ccNo.nextElementSibling.innerHTML == " *") {
+        } else if (ccNo.value.length === 3 && ccNo.nextElementSibling.innerHTML === " *") {
             ccNo.nextElementSibling.innerHTML = " Invalid Card Number";
             ccNo.focus();
         }
@@ -329,48 +329,54 @@ function init() {
     
     ccNo.addEventListener("input", displayCCType);
 
-    // Validate Only Digits and Correct Length
+    // Validate Credit Card Number
     
-    function onlyDigits(event) {
-        var str = event.target.value, patt = /[a-z]/ig;
-        if (patt.test(str)) {
-            event.target.nextElementSibling.innerHTML = " This field can only contain digits";
-            event.target.focus();
-        } else {}
-    }
-    
-    function checkLength() {
+    function validateCC() {
         ccNo.value = ccNo.value.replace(/ +/g, "");
-        if ((ccNo.value.charAt(0) == 3 && ccNo.value.length != 15) || (ccNo.value.charAt(0) == 4 && (ccNo.value.length != 16 || ccNo.value.length != 13)) || (ccNo.value.charAt(0) == 5 && ccNo.value.length != 16)) {
-            ccNo.nextElementSibling.innerHTML = " Invalid Card Number";
-            ccNo.focus();
-        }
-    }
-    
-    function checkLuhn() {
-        var ccDigits = ccNo.value.split("").reverse();
-        for (var i = 1; i < ccDigits.length; i += 2) {
-             ccDigits[i] = ccDigits[i] * 2;
+        var patt = /[a-z]/ig;
+        
+        // for Luhn Formula
+        var ccDigits = ccNo.value.split("").reverse(), i;
+        for (i = 1; i < ccDigits.length; i += 2) {
+            ccDigits[i] = ccDigits[i] * 2;
         }
         var newString = ccDigits.join("");
         var singleDigits = newString.split("");
-        var digitsTotal = 0;
-        for (var j = 0; j < singleDigits.length; j++) {
+        var digitsTotal = 0, j;
+        for (j = 0; j < singleDigits.length; j += 1) {
             digitsTotal += Number(singleDigits[j]);
         }
-        if ((digitsTotal % 10) == 0) {
-            ccNo.nextElementSibling.innerHTML = "";
-            document.pizzaOrder.CVC.focus();
-        } else {
+        // end for Luhn formula
+        
+        if (ccNo.value === "") {
+            ccNo.nextElementSibling.innerHTML = " Required field";
+            ccNo.focus();
+        } else if (patt.test(ccNo.value)) {
+            ccNo.nextElementSibling.innerHTML = " This field can only contain digits";
+            ccNo.focus();
+        } else if ((ccNo.value.charAt(0) == 3 && ccNo.value.length != 15) || (ccNo.value.charAt(0) == 4 && (ccNo.value.length != 16 && ccNo.value.length != 13)) || (ccNo.value.charAt(0) == 5 && ccNo.value.length != 16)) {
+            ccNo.nextElementSibling.innerHTML = " Invalid Card Number";
+            ccNo.focus();
+            
+        // Luhn Formula check
+        } else if ((digitsTotal % 10) !== 0) {
             ccNo.nextElementSibling.innerHTML = " Invalid Credit Card Number";
             ccNo.focus();
+        } else {
+            switch (ccNo.value.charAt(0)) {
+            case "3":
+                ccNo.nextElementSibling.innerHTML = " AMEX";
+                break;
+            case "4":
+                ccNo.nextElementSibling.innerHTML = " VISA";
+                break;
+            case "5":
+                ccNo.nextElementSibling.innerHTML = " MC";
+            }
         }
     }
     
-    //ccNo.addEventListener("blur", required);
-    ccNo.addEventListener("blur", onlyDigits);
-    ccNo.addEventListener("blur", checkLength);
-    ccNo.addEventListener("blur", checkLuhn);
+    ccNo.addEventListener("blur", validateCC);  
 
     // Check Expiration Date
 
